@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Chpt1
 {
-    class Program
+    public class ProductNameComparer:IComparer<Product>
     {
-        static void Main(string[] args)
+        public int Compare(Product x,Product y)
         {
-            //string msg = "";
-            Console.WriteLine("CHPT1");
-            Console.ReadLine();
+            return x.Name.CompareTo(y.Name);
         }
     }
 }
