@@ -12,6 +12,14 @@ namespace Chpt1
         {
             //string msg = "";
             Console.WriteLine("CHPT1");
+
+            var products = Product.GetSampleProducts();
+            products.Sort(new ProductNameComparer());
+
+            foreach(Product p in products)
+            {
+                Console.WriteLine(p.Name);
+            }
             Console.ReadLine();
         }
     }
