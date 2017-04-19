@@ -27,6 +27,9 @@ namespace Chpt3
 
             //objList = strList;
 
+            Animal[] animals = new Cat[5];
+            animals[0] = new Turtle();
+
             Console.ReadLine();
         }
 
@@ -85,5 +88,20 @@ namespace Chpt3
         {
             Console.WriteLine("Say Hello!!");
         }
+    }
+
+    class Animal
+    {
+
+    }
+
+    class Cat:Animal
+    {
+
+    }
+
+    class Turtle:Animal
+    {
+
     }
 }
