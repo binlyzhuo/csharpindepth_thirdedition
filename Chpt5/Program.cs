@@ -57,6 +57,15 @@ namespace Chpt5
                     Console.WriteLine(data);
                 }
             }
+
+            //=======================
+            EventHandler handler = new EventHandler(LogPlainEvent);
+            KeyPressEventHandler keyHandler = new KeyPressEventHandler(handler);
+
+            //==============
+            Dervied x = new Dervied();
+            SampleDelegate fac = new SampleDelegate(x.CandidateAction);
+            fac("TEST!!");
         }
 
         static void MyMethod()
@@ -73,6 +82,24 @@ namespace Chpt5
             }
 
             return new MemoryStream(buffer);
+        }
+
+
+        delegate void SampleDelegate(string x);
+        class Snippet
+        {
+            public void CandidateAction(string x)
+            {
+                Console.WriteLine("Snippet.CandidateAction");
+            }
+        }
+
+        class Dervied:Snippet
+        {
+            public void CandidateAction(object obj)
+            {
+                Console.WriteLine("Dervied.CandidateAction");
+            }
         }
     }
 }
