@@ -68,10 +68,36 @@ namespace Chpt5
             fac("TEST!!");
 
             ActionMethod();
+            //===============================
+            List<int> intList = new List<int>();
+            intList.Add(5);
+            intList.Add(10);
+            intList.Add(15);
+            intList.Add(25);
 
+            intList.ForEach(delegate(int n) {
+                Console.WriteLine(Math.Sqrt(n));
+            });
+
+            //================
+            Predicate<int> isEven = delegate (int xx) { return xx % 2 == 0; };
+            Console.WriteLine(isEven(10));
+
+            SortAndShowFiles("Sort by name:",delegate(FileInfo f1,FileInfo f2) { return f1.Name.CompareTo(f2.Name); });
         }
 
+        static void SortAndShowFiles(string title,Comparison<FileInfo> sortOrder)
+        {
+            FileInfo[] files = new DirectoryInfo(@"d:\download").GetFiles();
+            Array.Sort(files,sortOrder);
 
+            Console.WriteLine(title);
+
+            foreach(FileInfo file in files)
+            {
+                Console.WriteLine("{0}:({1})",file.Name,file.Length);
+            }
+        }
 
         static void ActionMethod()
         {
