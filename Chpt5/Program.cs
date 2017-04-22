@@ -66,6 +66,44 @@ namespace Chpt5
             Dervied x = new Dervied();
             SampleDelegate fac = new SampleDelegate(x.CandidateAction);
             fac("TEST!!");
+
+            ActionMethod();
+
+        }
+
+
+
+        static void ActionMethod()
+        {
+            Console.WriteLine("\n\nAction Delegate~\n\n");
+            Action<string> printReverse = delegate (string text)
+            {
+                char[] chars = text.ToCharArray();
+                Array.Reverse(chars);
+                Console.WriteLine(new string(chars));
+            };
+
+            printReverse("HelloWorld!");
+
+            Action<int> printRoot = delegate (int num)
+            {
+                Console.WriteLine(Math.Sqrt(num));
+            };
+
+            printRoot(2);
+
+            Action<IList<double>> printMean = delegate (IList<double> numbers)
+            {
+                double total = 0d;
+                foreach(double d in numbers)
+                {
+                    total += d;
+                }
+
+                Console.WriteLine(total/numbers.Count);
+            };
+
+            printMean(new double[] { 1,2,3,4,5,6});
         }
 
         static void MyMethod()
