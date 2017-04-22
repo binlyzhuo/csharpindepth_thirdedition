@@ -10,6 +10,16 @@ namespace Chpt5
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("");
+
+
+            Console.ReadLine();
+        }
+
+
+        static void LogPlainEvent(object obj,EventArgs e)
+        {
+
         }
     }
 }
