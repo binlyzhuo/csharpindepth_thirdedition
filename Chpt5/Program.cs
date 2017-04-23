@@ -83,7 +83,15 @@ namespace Chpt5
             Predicate<int> isEven = delegate (int xx) { return xx % 2 == 0; };
             Console.WriteLine(isEven(10));
 
-            SortAndShowFiles("Sort by name:",delegate(FileInfo f1,FileInfo f2) { return f1.Name.CompareTo(f2.Name); });
+            //SortAndShowFiles("Sort by name:",delegate(FileInfo f1,FileInfo f2) { return f1.Name.CompareTo(f2.Name); });
+
+            EnclosingMethod();
+            CaptureVariable();
+
+            Console.WriteLine("//=======================");
+            MethodInvoker xxx = CreateDelegateInstace();
+            xxx();
+            xxx();
         }
 
         static void SortAndShowFiles(string title,Comparison<FileInfo> sortOrder)
@@ -164,6 +172,55 @@ namespace Chpt5
             {
                 Console.WriteLine("Dervied.CandidateAction");
             }
+        }
+
+        static void EnclosingMethod()
+        {
+            int outerVariable = 5;
+            string captureVariable = "captured";
+
+            if(DateTime.Now.Hour==23)
+            {
+                int normalVariable = DateTime.Now.Minute;
+                Console.WriteLine(normalVariable);
+            }
+
+            MethodInvoker invoker = delegate () {
+                string anonLocal = "local to anonymous method~";
+                Console.WriteLine(captureVariable + anonLocal);
+            };
+
+            invoker();
+        }
+
+        static void CaptureVariable()
+        {
+            Console.WriteLine("CaptureVariable Method~");
+            string captured = "before x is created!";
+            MethodInvoker x = delegate () {
+                Console.WriteLine(captured);
+                captured = "changed by x~";
+            };
+
+            captured = "directly before x is invoked~";
+            x();
+            Console.WriteLine(captured);
+            captured = "before second invocation~";
+            x();
+
+            //=================
+
+        }
+
+        static MethodInvoker CreateDelegateInstace()
+        {
+            int count = 5;
+            MethodInvoker ret = delegate () {
+                Console.WriteLine(count);//5
+                count++;
+            };
+            ret();
+            return ret;
         }
     }
 }
