@@ -92,6 +92,8 @@ namespace Chpt5
             MethodInvoker xxx = CreateDelegateInstace();
             xxx();
             xxx();
+
+            InitCapturedVariable();
         }
 
         static void SortAndShowFiles(string title,Comparison<FileInfo> sortOrder)
@@ -221,6 +223,34 @@ namespace Chpt5
             };
             ret();
             return ret;
+        }
+
+        static void InitCapturedVariable()
+        {
+            Console.WriteLine("--------------------------");
+            List<MethodInvoker> list = new List<MethodInvoker>();
+            //int count = 0;
+
+            for(int index=0;index<5;index++)
+            {
+                int counter = index * 10;
+                list.Add(delegate() {
+                    Console.WriteLine(counter);
+                    counter++;
+                });
+            }
+
+            foreach(var t in list)
+            {
+                t();
+            }
+
+            Console.WriteLine(">>>>>>>>>>>>>>>>>>>>>");
+            list[0]();
+            list[0]();
+            list[0]();
+
+            list[1]();
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Chpt3
             Console.WriteLine(typeof(List<X>));
         }
 
-        static void GetType()
+        static new void GetType()
         {
             //Person p = new Person("Bin");
             Type t = typeof(Person<int>);
