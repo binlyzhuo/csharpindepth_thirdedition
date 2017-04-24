@@ -39,6 +39,9 @@ namespace Chpt6
                 Console.WriteLine("Received:{0}",i);
                 Thread.Sleep(300);
             }
+
+            Console.WriteLine("\n\n...........................");
+            PrintResult();
             Console.ReadLine();
         }
 
@@ -59,13 +62,37 @@ namespace Chpt6
 
         static IEnumerable<int> CountWithTimeLimit(DateTime limit)
         {
-            for(int i=0;i<=100;i++)
+            try
             {
-                if(DateTime.Now>limit)
+                for (int i = 0; i <= 100; i++)
                 {
-                    yield break;
+                    if (DateTime.Now > limit)
+                    {
+                        yield break;
+                    }
+                    yield return i;
                 }
-                yield return i;
+            }
+            finally
+            {
+                Console.WriteLine("Stopping");
+            }
+            
+        }
+
+        static void PrintResult()
+        {
+            DateTime stop = DateTime.Now.AddSeconds(2);
+            foreach(int i in CountWithTimeLimit(stop))
+            {
+                Console.WriteLine("Received:{0}",i);
+                if(i>3)
+                {
+                    Console.WriteLine("Returning..");
+                    return;
+                }
+
+                Thread.Sleep(300);
             }
         }
     }

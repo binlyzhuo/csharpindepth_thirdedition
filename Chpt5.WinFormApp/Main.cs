@@ -17,6 +17,20 @@ namespace Chpt5.WinFormApp
             InitializeComponent();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int x = 1;
+            int y = 2;
 
+            if(x>y)
+            {
+                string r = "0";
+            }
+
+            if(x-y>0)
+            {
+                string r = "0";
+            }
+        }
     }
 }
