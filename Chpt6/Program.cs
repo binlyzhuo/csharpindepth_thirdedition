@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Chpt6
@@ -42,6 +43,9 @@ namespace Chpt6
 
             Console.WriteLine("\n\n...........................");
             PrintResult();
+
+            PrintFile();
+            Console.WriteLine("\n\n...........................");
             Console.ReadLine();
         }
 
@@ -94,6 +98,37 @@ namespace Chpt6
 
                 Thread.Sleep(300);
             }
+        }
+
+        static void PrintFile()
+        {
+            using (TextReader reader = File.OpenText("read.txt"))
+            {
+                string line;
+                while((line=reader.ReadLine())!=null)
+                {
+                    Console.WriteLine(line);
+                }
+            }
+        }
+
+        static IEnumerable<string> ReadLines(Func<TextReader> provider)
+        {
+            using (TextReader reader = provider())
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    yield return line;
+                }
+            }
+        }
+
+        static IEnumerable<string> ReadLines(string fileName, Encoding encoding)
+        {
+            return ReadLines(delegate {
+                return File.OpenText(fileName);
+            });
         }
     }
 }
