@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Chpt8
@@ -17,6 +18,13 @@ namespace Chpt8
             Person p3 = new Person("user003",30);
             p3.Dispose();
             Console.WriteLine(Person.InstanceCounter);
+
+            var starter = (ThreadStart)delegate ()
+            {
+                Console.WriteLine("Hello~~");
+            };
+
+            starter();
             Console.ReadLine();
         }
     }
