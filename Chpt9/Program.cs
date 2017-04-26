@@ -15,6 +15,12 @@ namespace Chpt9
             Func<string, int> getLen = (txt) => txt.Length;
             Console.WriteLine(getLen("Hello"));
             Console.WriteLine(returnLen("get"));
+
+            Action<Film> print = (file)=>Console.WriteLine("Name:{0},Year:{1}",file.Name,file.Year);
+            Film.SampleData().ForEach(print);
+            Film.SampleData().FindAll(u => u.Year > 1955).ForEach(print);
+            Film.SampleData().Sort((f1, f2) => f1.Name.CompareTo(f2.Name));
+            Film.SampleData().ForEach(print);
             Console.ReadLine();
         }
     }
